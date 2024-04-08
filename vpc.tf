@@ -14,12 +14,6 @@ resource "yandex_vpc_subnet" "subnet-b" {
   network_id     = yandex_vpc_network.network.id
   zone           = "ru-central1-b"
 }
-resource "yandex_vpc_subnet" "subnet-c" {
-  name           = var.subnet_c_name
-  v4_cidr_blocks = var.subnet_c_cidr_blocks
-  network_id     = yandex_vpc_network.network.id
-  zone           = "ru-central1-c"
-}
 resource "yandex_vpc_subnet" "subnet-d" {
   name           = var.subnet_d_name
   v4_cidr_blocks = var.subnet_d_cidr_blocks

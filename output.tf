@@ -10,9 +10,6 @@ output "subnet_a_id" {
 output "subnet_b_id" {
   value = yandex_vpc_subnet.subnet-b.id
 }
-output "subnet_c_id" {
-  value = yandex_vpc_subnet.subnet-c.id
-}
 output "subnet_d_id" {
   value = yandex_vpc_subnet.subnet-d.id
 }

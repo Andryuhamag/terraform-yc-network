@@ -32,15 +32,6 @@ variable "subnet_b_cidr_blocks" {
   description = "value"
   default     = ["10.2.0.0/16"]
 }
-variable "subnet_c_name" {
-  description = "Name of subnet for zone ru-central1-c"
-  type        = string
-  default     = "default-subnet-c"
-}
-variable "subnet_c_cidr_blocks" {
-  description = "value"
-  default     = ["10.3.0.0/16"]
-}
 variable "subnet_d_name" {
   description = "Name of subnet for zone ru-central1-d"
   type        = string
