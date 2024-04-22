@@ -1,43 +1,61 @@
-#=============== Network variables ===============#
+#================== Network variables ==================#
 variable "network_name" {
   description = "Network name"
   type        = string
   default     = "default-network"
 }
-variable "sg_name" {
-  description = "Security group name"
-  type        = string
-  default     = "default-sg"
-}
+
 variable "network_description" {
   description = "Network description"
   type        = string
   default     = "Default network"
 }
-variable "subnet_a_name" {
-  description = "Name of subnet for zone ru-central1-a"
+
+#=============== Security goup variables ===============#
+variable "sg_name" {
+  description = "Security group name"
   type        = string
-  default     = "default-subnet-a"
+  default     = "default-sg"
 }
-variable "subnet_a_cidr_blocks" {
-  description = "value"
-  default     = ["10.1.0.0/16"]
-}
-variable "subnet_b_name" {
-  description = "Name of subnet for zone ru-central1-b"
+
+variable "sg_description" {
+  description = "Security group description"
   type        = string
-  default     = "default-subnet-b"
+  default     = "Default security group"
 }
-variable "subnet_b_cidr_blocks" {
-  description = "value"
-  default     = ["10.2.0.0/16"]
-}
-variable "subnet_d_name" {
-  description = "Name of subnet for zone ru-central1-d"
-  type        = string
-  default     = "default-subnet-d"
-}
-variable "subnet_d_cidr_blocks" {
-  description = "value"
-  default     = ["10.4.0.0/16"]
+
+#================== Subnets variables ==================#
+variable "subnets" {
+
+  type = list(
+    object(
+      {
+        name        = string,
+        description = string,
+        zone        = string,
+        cidr        = list(string)
+      }
+    )
+  )
+
+  default = [
+    {
+      name        = "default-subnet-a"
+      description = "Default subnet for ru-central1-a zone"
+      zone        = "ru-central1-a"
+      cidr        = ["10.0.1.0/28"]
+    },
+    {
+      name        = "default-subnet-b"
+      description = "Default subnet for ru-central1-b zone"
+      zone        = "ru-central1-b"
+      cidr        = ["10.0.2.0/28"]
+    },
+    {
+      name        = "default-subnet-d"
+      description = "Default subnet for ru-central1-d zone"
+      zone        = "ru-central1-d"
+      cidr        = ["10.0.4.0/28"]
+    }
+  ]
 }
