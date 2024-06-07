@@ -59,3 +59,70 @@ variable "subnets" {
     }
   ]
 }
+
+#============== Security group variables ===============#
+variable "ingress" {
+
+  type = list(
+    object(
+      {
+        protocol       = string,
+        description    = string,
+        v4_cidr_blocks = list(string)
+        from_port      = number
+        to_port        = number
+      }
+    )
+  )
+
+  default = [
+    {
+      protocol       = "TCP"
+      description    = "http"
+      v4_cidr_blocks = ["0.0.0.0/0"]
+      from_port      = 80
+      to_port        = 80
+    },
+    {
+      protocol       = "TCP"
+      description    = "https"
+      v4_cidr_blocks = ["0.0.0.0/0"]
+      from_port      = 443
+      to_port        = 443
+
+    },
+    {
+      protocol       = "TCP"
+      description    = "ssh"
+      v4_cidr_blocks = ["0.0.0.0/0"]
+      from_port      = 22
+      to_port        = 22
+
+    }
+  ]
+}
+
+variable "egress" {
+
+  type = list(
+    object(
+      {
+        protocol       = string,
+        description    = string,
+        v4_cidr_blocks = list(string)
+        from_port      = number
+        to_port        = number
+      }
+    )
+  )
+
+  default = [
+    {
+      protocol       = "ANY"
+      description    = "Any connections"
+      v4_cidr_blocks = ["0.0.0.0/0"]
+      from_port      = 0
+      to_port        = 65535
+    }
+  ]
+}

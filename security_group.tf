@@ -3,19 +3,25 @@ resource "yandex_vpc_security_group" "security_group" {
   description = var.sg_description
   network_id  = yandex_vpc_network.network.id
 
-  ingress {
-    protocol       = "ANY"
-    description    = "Any connections"
-    v4_cidr_blocks = ["0.0.0.0/0"]
-    from_port      = 0
-    to_port        = 65535
+  dynamic "ingress" {
+    for_each = var.ingress
+    content {
+      protocol       = ingress.value["protocol"]
+      description    = ingress.value["description"]
+      v4_cidr_blocks = ingress.value["v4_cidr_blocks"]
+      from_port      = ingress.value["from_port"]
+      to_port        = ingress.value["to_port"]
+    }
   }
 
-  egress {
-    protocol       = "ANY"
-    description    = "Any connections"
-    v4_cidr_blocks = ["0.0.0.0/0"]
-    from_port      = 0
-    to_port        = 65535
+  dynamic "egress" {
+    for_each = var.egress
+    content {
+      protocol       = egress.value["protocol"]
+      description    = egress.value["description"]
+      v4_cidr_blocks = egress.value["v4_cidr_blocks"]
+      from_port      = egress.value["from_port"]
+      to_port        = egress.value["to_port"]
+    }
   }
 }
